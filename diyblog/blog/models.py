@@ -12,7 +12,7 @@ class Author(models.Model):
     date_of_death = models.DateField(null=True, blank=True)
     
     def __str__(self):
-        return f'{self.last_name}, {self.first_name}'
+        return f'{self.first_name} {self.last_name}'
 
     def get_absolute_url(self):
         return reverse('author-detail', args=[str(self.id)])
@@ -30,7 +30,8 @@ class BlogPost(models.Model):
         help_text="Title of the blog"
     )
     content = models.TextField(
-        help_text="Write here!"
+        "Description",
+        help_text="Write here!",
     )
     post_date = models.DateTimeField(default=timezone.now)
 
@@ -41,7 +42,7 @@ class BlogPost(models.Model):
         return reverse('blogpost-detail', args=[str(self.id)])
 
     class Meta:
-        ordering = ['post_date',]
+        ordering = ['-post_date',]
 
 
 class Comment(models.Model):

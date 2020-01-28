@@ -1,9 +1,7 @@
 {% extends "blog/base_generic.html" %}
 
 {% block content %}
-  <h1>Comment for Blog post: {{ comment.blogpost.title }}</h1>
-  <h4>Post Date: {{ comment.pub_date }}</h4>
-  <p>By {{ comment.comment_by }}:</p> -->
+  <p>Post your comment for: <a href="{% url 'blogpost-detail' comment.blog_post.pk %}">{{ comment.blog_post.title }}</a></p>
   <form action="" method="post">
     {% csrf_token %}
     <table>

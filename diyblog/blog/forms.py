@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 class AddComment(forms.Form):
-    added_comment = forms.CharField(help_text="Add a comment")
+    added_comment = forms.CharField(help_text="Add a comment", label="Description")
 
     def clean_comment(self):
         data = self.cleaned_data['added_comment']

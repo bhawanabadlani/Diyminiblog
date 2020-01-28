@@ -27,13 +27,13 @@ def index(request):
 @login_required
 def add_comment(request, pk):
     blogpost = get_object_or_404(BlogPost, pk=pk)
+    comment = Comment()
+    comment.blog_post = blogpost
+    comment.comment_by = request.user  
     #  If this is a POST request then process the Form data
     if request.method == 'POST':
         # Create a form instance and populate it with data from the request (binding):
         form = AddComment(request.POST)
-        comment = Comment()
-        comment.blog_post = blogpost
-        comment.comment_by = request.user
         # Check if the form is valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required (here we just write it to 
@@ -45,8 +45,9 @@ def add_comment(request, pk):
             return HttpResponseRedirect(reverse('blogpost-detail', args=[pk]))
 
     else:
-        comment = ''
+     
         form = AddComment(initial={'comment': comment})
+    
     context = {
         'form': form,
         'comment': comment,
